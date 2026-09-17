@@ -9,6 +9,7 @@ import { deleteItem, loadItems, updateItem } from "@/lib/storage";
 import { formatMoneySigned, todayIso } from "@/lib/format";
 import { ChevronLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
+import SelectField from "@/components/SelectField";
 
 export default function ItemDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -91,7 +92,7 @@ export default function ItemDetailPage() {
       </div>
 
       {profit !== null && (
-        <div className="px-5 mb-5 grid grid-cols-2 gap-2.5">
+        <div className={`px-5 mb-5 grid gap-2.5 ${days !== null ? "grid-cols-3" : "grid-cols-2"}`}>
           <MiniStat label="Profit" value={formatMoneySigned(profit)} tone={profit >= 0 ? "good" : "bad"} />
           <MiniStat label="ROI" value={roi !== null ? `${roi >= 0 ? "+" : ""}${roi.toFixed(0)}%` : "—"} tone={roi !== null && roi >= 0 ? "good" : "bad"} />
           {days !== null && <MiniStat label="Days to sell" value={`${days}d`} />}
@@ -99,32 +100,24 @@ export default function ItemDetailPage() {
       )}
 
       <div className="px-5 space-y-4">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-4">
           <Field label="Category">
-            <select
-              value={item.category}
-              onChange={(e) => handleField("category", e.target.value as Category)}
-              className={selectClass}
-            >
+            <SelectField value={item.category} onChange={(e) => handleField("category", e.target.value as Category)}>
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>
               ))}
-            </select>
+            </SelectField>
           </Field>
           <Field label="Platform">
-            <select
-              value={item.platform}
-              onChange={(e) => handleField("platform", e.target.value as Platform)}
-              className={selectClass}
-            >
+            <SelectField value={item.platform} onChange={(e) => handleField("platform", e.target.value as Platform)}>
               {PLATFORMS.map((p) => (
                 <option key={p} value={p}>
                   {p}
                 </option>
               ))}
-            </select>
+            </SelectField>
           </Field>
         </div>
 
@@ -233,7 +226,6 @@ function MiniStat({ label, value, tone }: { label: string; value: string; tone?:
 
 const inputClass =
   "w-full bg-paper border border-hairline rounded-md px-3 py-2.5 text-[15px] text-ink placeholder:text-inkmuted/70 focus:outline-none focus:border-clay";
-const selectClass = `${inputClass} appearance-none`;
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

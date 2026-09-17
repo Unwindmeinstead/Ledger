@@ -7,6 +7,7 @@ import BottomNav from "@/components/BottomNav";
 import { CATEGORIES, Category, PLATFORMS, Platform, Item, getStatus } from "@/lib/types";
 import { addItem, loadItems, newId, updateItem } from "@/lib/storage";
 import { todayIso } from "@/lib/format";
+import SelectField from "@/components/SelectField";
 
 type EntryType = "buy" | "sell";
 
@@ -147,17 +148,13 @@ export default function LogPage() {
 
         {entryType === "sell" && sellMode === "link" ? (
           <Field label="Item">
-            <select
-              value={linkedId}
-              onChange={(e) => setLinkedId(e.target.value)}
-              className={selectClass}
-            >
+            <SelectField value={linkedId} onChange={(e) => setLinkedId(e.target.value)}>
               {activeItems.map((it) => (
                 <option key={it.id} value={it.id}>
                   {it.title} — bought ${it.buyPrice}
                 </option>
               ))}
-            </select>
+            </SelectField>
           </Field>
         ) : (
           <Field label="Description">
@@ -172,24 +169,24 @@ export default function LogPage() {
         )}
 
         {!(entryType === "sell" && sellMode === "link") && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-4">
             <Field label="Category">
-              <select value={category} onChange={(e) => setCategory(e.target.value as Category)} className={selectClass}>
+              <SelectField value={category} onChange={(e) => setCategory(e.target.value as Category)}>
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>
                     {c}
                   </option>
                 ))}
-              </select>
+              </SelectField>
             </Field>
             <Field label="Platform">
-              <select value={platform} onChange={(e) => setPlatform(e.target.value as Platform)} className={selectClass}>
+              <SelectField value={platform} onChange={(e) => setPlatform(e.target.value as Platform)}>
                 {PLATFORMS.map((p) => (
                   <option key={p} value={p}>
                     {p}
                   </option>
                 ))}
-              </select>
+              </SelectField>
             </Field>
           </div>
         )}
@@ -246,7 +243,6 @@ export default function LogPage() {
 
 const inputClass =
   "w-full bg-paper border border-hairline rounded-md px-3 py-2.5 text-[15px] text-ink placeholder:text-inkmuted/70 focus:outline-none focus:border-clay";
-const selectClass = `${inputClass} appearance-none`;
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
