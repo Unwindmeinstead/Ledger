@@ -121,7 +121,7 @@ export default function ItemDetailPage() {
           </Field>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-4">
           <Field label="Date bought">
             <input
               type="date"
@@ -136,7 +136,7 @@ export default function ItemDetailPage() {
         </div>
 
         {item.sellDate ? (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-4">
             <Field label="Date sold">
               <input
                 type="date"
@@ -150,25 +150,23 @@ export default function ItemDetailPage() {
             </Field>
           </div>
         ) : markingSold ? (
-          <form onSubmit={confirmSold} className="border border-hairline rounded-md p-3.5 space-y-3 bg-paper">
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Date sold">
-                <input type="date" value={sellDate} onChange={(e) => setSellDate(e.target.value)} className={inputClass} />
-              </Field>
-              <Field label="Sale price">
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-inkmuted text-[15px]">$</span>
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    value={sellPrice}
-                    onChange={(e) => setSellPrice(e.target.value)}
-                    className={`${inputClass} pl-6`}
-                    placeholder="0"
-                  />
-                </div>
-              </Field>
-            </div>
+          <form onSubmit={confirmSold} className="border border-hairline rounded-md p-3.5 space-y-4 bg-paper">
+            <Field label="Date sold">
+              <input type="date" value={sellDate} onChange={(e) => setSellDate(e.target.value)} className={inputClass} />
+            </Field>
+            <Field label="Sale price">
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-inkmuted text-[15px]">$</span>
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  value={sellPrice}
+                  onChange={(e) => setSellPrice(e.target.value)}
+                  className={`${inputClass} pl-6`}
+                  placeholder="0"
+                />
+              </div>
+            </Field>
             <button type="submit" className="w-full bg-clay text-paper font-medium py-2.5 rounded-md active:bg-clayDeep">
               Confirm sold
             </button>

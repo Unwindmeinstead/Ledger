@@ -191,7 +191,7 @@ export default function LogPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-4">
           <Field label={entryType === "buy" ? "Date bought" : "Date sold"}>
             <input
               type="date"
