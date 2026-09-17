@@ -1,0 +1,14 @@
+{
+  "name": "Ledger — Flip Tracker",
+  "short_name": "Ledger",
+  "description": "Track your marketplace buys, sells, and flips.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0EEE6",
+  "theme_color": "#F0EEE6",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" }
+  ]
+}
